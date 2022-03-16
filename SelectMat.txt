@@ -1,0 +1,10 @@
+SELECT m.wording,
+ROUND((m.coef * 100) / (SELECT SUM(coef) FROM Matter), 1) AS percentage
+FROM (
+      SELECT wording, coef
+      FROM Matter
+    GROUP BY wording, coef
+) AS m;
+
+SELECT SUM(coef) FROM Matter;
+

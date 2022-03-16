@@ -1,0 +1,56 @@
+INSERT INTO Student (numstud, name, firstname, dateofbirth, street, postalcod, city)
+VALUES
+(1, 'Dupont', 'Richard', '19790510', '34 avenue Margaud Levy', 69004, 'Lyon'),
+(2, 'Greenaway', 'Shani', '19800916', '6 rue de Gosselin', 59777, 'Lille'),
+(3, 'Lutz', 'Chelsy', '19800929', 'chemin Raymond Blanchet', 75015, 'Paris'),
+(4, 'Durand', 'Taylor', '19821207', '25 rue Renée Peltier', 59160 ,'Lille'),
+(5, 'Burrows', 'Reis', '19841019', 'chemin de Delannoy', 75011, 'Paris'),
+(6, 'Hayden', 'Lorelai', '19841219', 'avenue de Dupre', 69003, 'Lyon'),
+(7, 'Martin', 'Naya', '19850726', '800 rue de Bouchet', 69007, 'Lyon');
+
+INSERT INTO Matter (codemat, wording, coef)
+VALUES
+('Math1', 'Mathematique', 3),
+('SVT1', 'SVT', 1),
+('PC1', 'Physique Chimie', 2);
+
+INSERT INTO Test (numtest, testdate, place)
+VALUES
+(1, 20140423, 'Math1'),
+(2, '20140630', 'SVT1'),
+(3, '20140312', 'Math1'),
+(4, 20140504, 'PC1'),
+(5, 20140202, 'SVT1');
+
+INSERT INTO Notation (score, numstud, numtest)
+VALUES
+(15, 2, 1),
+(13, 3, 2),
+(16, 4, 1),
+(19, 6, 4),
+(11, 1, 5),
+(10, 2, 2),
+(3, 7, 4),
+(20, 4, 2),
+(9, 3, 5),
+(13, 2, 1),
+(11, 1, 3),
+(4, 7, 2),
+(11, 5, 4),
+(2, 6, 5),
+(19, 1, 3),
+(7, 2, 2),
+(12, 7, 1),
+(13, 3, 4),
+(1, 5, 4),
+(13, 4, 3),
+(10, 1, 2),
+(8, 7, 5),
+(16, 3, 3),
+(6, 6, 4),
+(17, 5, 2),
+(4, 4, 5),
+(14, 7, 4),
+(6, 6, 5),
+(13, 6, 4),
+(20, 5, 5);

@@ -1,0 +1,66 @@
+SELECT COUNT(numtest) FROM Test;
+
+SELECT score, st.name, st.firstname
+FROM Notation INNER JOIN Student
+AS st ON Notation.numstud = st.numstud;
+
+SELECT score, st.name, st.firstname, m.wording
+FROM Notation
+INNER JOIN Student AS st ON Notation.numstud = st.numstud
+INNER JOIN Test AS t ON Notation.numtest = t.numtest
+INNER JOIN Matter AS m ON t.place = m.codemat;
+
+SELECT score FROM Notation WHERE score >= 10;
+
+SELECT name, firstname FROM Student
+INNER JOIN Notation AS nt ON Student.numstud = nt.numstud
+WHERE nt.score = 20;
+
+SELECT st.name, st.firstname, AVG(score) AS average
+FROM Notation
+INNER JOIN Student AS st ON Notation.numstud = st.numstud
+GROUP BY st.name, st.firstname;
+
+SELECT * FROM Test WHERE testdate
+BETWEEN 20140101 AND 20140630;
+
+SELECT numtest, testdate, place, m.wording
+FROM Test
+INNER JOIN Matter AS m ON Test.place = m.codemat;
+
+SELECT st.name, st.firstname, AVG(score) AS average
+FROM Notation
+INNER JOIN Student AS st ON Notation.numstud = st.numstud
+GROUP BY st.name, st.firstname
+ORDER BY average DESC;
+
+SELECT m.wording, AVG(nt.score) AS average
+FROM Test
+INNER JOIN Matter AS m ON m.codemat = Test.place
+INNER JOIN Notation AS nt ON nt.numtest = Test.numtest
+WHERE Test.numtest IN
+(
+    SELECT notat.numtest AS result
+    FROM Notation AS notat
+    INNER JOIN Test AS tst ON notat.numtest = tst.numtest
+    INNER JOIN Matter AS mt ON tst.place = mt.codemat
+    GROUP BY notat.numtest
+    HAVING COUNT(notat.score) > 1
+)
+GROUP BY m.wording;
+
+SELECT Test.numtest, AVG(nt.score) AS average
+FROM Test
+INNER JOIN Matter AS m ON m.codemat = Test.place
+INNER JOIN Notation AS nt ON nt.numtest = Test.numtest
+WHERE Test.numtest IN
+(
+    SELECT notat.numtest AS result
+    FROM Notation AS notat
+    INNER JOIN Test AS tst ON notat.numtest = tst.numtest
+    INNER JOIN Matter AS mt ON tst.place = mt.codemat
+    INNER JOIN Student AS st ON notat.numstud = st.numstud
+    GROUP BY notat.numtest
+    HAVING COUNT(st.numstud) < 6
+)
+GROUP BY Test.numtest;
